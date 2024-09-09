@@ -18,6 +18,8 @@ services:
     build: 
       context: ../api-service
       dockerfile: ../dev-config/Dockerfile.backend
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
     ports: 
       - '127.0.0.1:8080:8080'
     container_name: api
@@ -45,4 +47,4 @@ services:
 networks:
   tracker_net:
 volumes: 
-  db:
+  pgdata: {}
