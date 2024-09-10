@@ -20,8 +20,10 @@ services:
       dockerfile: ../dev-config/Dockerfile.backend
     environment:
       - DATABASE_URL=${DATABASE_URL}
+      - API_PORT=${API_PORT}
+      - JWT_SECRET=${JWT_SECRET}
     ports: 
-      - '127.0.0.1:8080:8080'
+      - '127.0.0.1:${API_PORT}:${API_PORT}'
     container_name: api
     networks:
       - tracker_net
@@ -33,9 +35,9 @@ services:
   client: 
     build:
       context: ../client-service
-      dockerfile: ../dev-config/Dockerfile.frontend
+      dockerfile: ../dev-config/Dockerfile.frontend 
     ports: 
-      - '127.0.0.1:3000:3000'
+      - '127.0.0.1:${CLIENT_PORT}:${CLIENT_PORT}'
     container_name: client
     volumes:
       - ../client-service:/app
