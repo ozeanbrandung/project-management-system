@@ -22,6 +22,7 @@ services:
       - DATABASE_URL=${DATABASE_URL}
       - API_PORT=${API_PORT}
       - JWT_SECRET=${JWT_SECRET}
+      - API_DOMAIN=${API_DOMAIN}
     ports: 
       - '127.0.0.1:${API_PORT}:${API_PORT}'
     container_name: api
