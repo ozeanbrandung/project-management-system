@@ -28,56 +28,56 @@ export class UserService {
     });
   }
 
-  //TODO: move statistics to it's own entity 
+  //TODO: move statistics to it's own entity
   async getProfile(id: string) {
-    const profile = await this.getById(id)
+    const profile = await this.getById(id);
 
-    const totalTasks = profile.tasks.length
+    const totalTasks = profile.tasks.length;
     //TODO: move to service, do not address here prisma directly!
     const completedTasks = await this.prisma.task.count({
       where: {
-        userId: id, 
-        isCompleted: true 
-      }
-    })
+        userId: id,
+        isCompleted: true,
+      },
+    });
 
     const todayStart = startOfDay(new Date());
 
-    const weekStart = startOfDay(subDays(new Date(), 7))
+    const weekStart = startOfDay(subDays(new Date(), 7));
 
     //TODO: move to service, do not address here prisma directly!
     const todayTasks = await this.prisma.task.count({
       where: {
-        userId: id, 
+        userId: id,
         createdAt: {
           //greater than or equal (lte <=, gte >=, lt <, gt >)
-          gte: todayStart.toISOString()
-        }
-      }
-    })
+          gte: todayStart.toISOString(),
+        },
+      },
+    });
 
     const weekTasks = await this.prisma.task.count({
       where: {
-        userId: id, 
+        userId: id,
         createdAt: {
           //greater than or equal (lte <=, gte >=, lt <, gt >)
-          gte: weekStart.toISOString()
-        }
-      }
-    })
+          gte: weekStart.toISOString(),
+        },
+      },
+    });
 
-    const {password, ...user} = profile
+    const { password, ...user } = profile;
 
     //TODO: move strings to json
     return {
       user,
       statistics: [
-        {label: 'Всего задач', value: totalTasks},
-        {label: 'Завершенные задачи', value: completedTasks},
-        {label: 'Задачи на сегодня', value: todayTasks},
-        {label: 'Задачи на неделю', value: weekTasks}
-      ]
-    }
+        { label: 'Всего задач', value: totalTasks },
+        { label: 'Завершенные задачи', value: completedTasks },
+        { label: 'Задачи на сегодня', value: todayTasks },
+        { label: 'Задачи на неделю', value: weekTasks },
+      ],
+    };
   }
 
   async create(dto: AuthDto) {
@@ -96,7 +96,7 @@ export class UserService {
     let data = dto;
 
     if (dto.password) {
-      data= {...dto, password: await hash(dto.password)}
+      data = { ...dto, password: await hash(dto.password) };
     }
 
     return this.prisma.user.update({
@@ -107,7 +107,7 @@ export class UserService {
       select: {
         name: true,
         email: true,
-      }
+      },
     });
   }
 }
