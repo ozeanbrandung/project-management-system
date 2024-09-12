@@ -52,4 +52,4 @@ axiosWithAuth.interceptors.response.use(
 	}
 )
 
-export { axiosClassic, axiosWithAuth }
+export { axiosWithoutAuth, axiosWithAuth }

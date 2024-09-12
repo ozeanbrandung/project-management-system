@@ -10,10 +10,10 @@ export interface ITimerSessionResponse extends IBase {
 	rounds?: ITimerRoundResponse[]
 }
 
-export type TypeTimerSessionState = Partial<
+export type TypeTimerSessionFormState = Partial<
 	Omit<ITimerSessionResponse, 'id' | 'createdAt' | 'updatedAt'>
 >
 
-export type TypeTimerRoundState = Partial<
+export type TypeTimerRoundFormState = Partial<
 	Omit<ITimerRoundResponse, 'id' | 'createdAt' | 'updatedAt'>
 >

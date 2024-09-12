@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Ysabeau } from 'next/font/google' 
+import { SITE_NAME } from "@/constants/seo.constants";
 import "./globals.scss";
-import { SITE_NAME } from "../../constants/seo.constants";
 import { Providers } from "./providers";
 import {Toaster} from 'sonner';
 
